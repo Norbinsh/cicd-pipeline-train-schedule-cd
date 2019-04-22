@@ -9,6 +9,7 @@ pipeline {
             }
         }
         stage('DeployToStage') {
+            steps {
             sshPublisher(
                 failOnError: true,
                 continueOnError: false,
@@ -26,6 +27,8 @@ pipeline {
                     )
                 ]
             )
+        }
+        
         }
     }
 }
