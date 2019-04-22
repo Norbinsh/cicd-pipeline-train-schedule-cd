@@ -8,5 +8,24 @@ pipeline {
                 archiveArtifacts artifacts: 'dist/trainSchedule.zip'
             }
         }
+        stage('DeployToStage') {
+            sshPublisher(
+                failOnError: true,
+                continueOnError: false,
+                publishers: [
+                    sshPublisherDesc(
+                        configName: 'staging',
+                    transfers: [
+                        sshTransfer(
+                            sourceFiles: 'dist/trainSchedule.zip',
+                            removePrefix: 'dist/',
+                            remoteDirectory: '/tmp',
+                            execCommand: 'sudo /usr/bin/systemctl stop train-schedule && rm -rf /opt/train-schedule/* && unzip'
+                        )
+                    ]
+                    )
+                ]
+            )
+        }
     }
 }
