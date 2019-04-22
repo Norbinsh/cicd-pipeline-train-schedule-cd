@@ -42,9 +42,10 @@ pipeline {
             when {
                 branch 'master'
             }
-            input 'Did you check staging and wish to deploy to production?'
-            milestone(1)
-                        steps {
+            steps {
+                input 'Did you check staging and wish to deploy to production?'
+                milestone(1)
+                        
                 withCredentials([usernamePassword(credentialsId: 'webserver_login', usernameVariable: 'USERNAME', passwordVariable: 'USERPASS')]) {
             sshPublisher(
                 failOnError: true,
