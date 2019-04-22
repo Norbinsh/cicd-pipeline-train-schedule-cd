@@ -9,6 +9,9 @@ pipeline {
             }
         }
         stage('DeployToStage') {
+            when {
+                branch 'master'
+            }
             steps {
             sshPublisher(
                 failOnError: true,
