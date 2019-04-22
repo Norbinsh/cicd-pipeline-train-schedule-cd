@@ -24,7 +24,7 @@ pipeline {
                             sourceFiles: 'dist/trainSchedule.zip',
                             removePrefix: 'dist/',
                             remoteDirectory: '/tmp',
-                            execCommand: 'ls -la /tmp',
+                            execCommand: 'sleep 25 && ls -la /tmp',
                             // execCommand: '/usr/bin/systemctl stop train-schedule',
                             // execCommand: 'rm -rf /opt/train-schedule/*',
                             // execCommand: 'unzip /tmp/trainSchedule.zip -d /opt/train-schedule',
